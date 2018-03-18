@@ -13,11 +13,15 @@ class CrudController{
 
         this.router = express.Router();
         this.routes = {
-            '/': [{method: 'get', cb: this.readAll}],
-            '/:id': [{method: 'get', cb: this.read}],
-            '/': [{method: 'post', cb: this.create}],
-            '/:id': [{method: 'put', cb: this.update}],
-            '/:id': [{method: 'delete', cb: this.delete}]
+            '/': [
+                {method: 'get', cb: this.readAll},
+                {method: 'post', cb: this.create}
+            ],
+            '/:id': [
+                {method: 'get', cb: this.read},
+                {method: 'put', cb: this.update},
+                {method: 'delete', cb: this.delete}
+            ]
         };
     }
 
@@ -28,7 +32,6 @@ class CrudController{
 
     async read(req, res){
         let data = await this.service.read(req.params.id);
-        this.cache.set(req, data);
         res.json(data); 
     }
 
@@ -56,7 +59,6 @@ class CrudController{
             if(!handlers || !Array.isArray(handlers)){
                 return;
             }
-
             for(let handler of handlers) {
                 this.router[handler.method](
                     route,

@@ -8,7 +8,7 @@ class UserController extends CrudController {
     }
 }
 
-module.exports = (agentService) => {
-    const controller = new UserController(agentService);
+module.exports = (userService) => {
+    const controller = new UserController(userService);
     return controller.router;
 }

@@ -3,34 +3,27 @@ const cookieParser = require('cookie-parser');
 const bodyParse = require('body-parser');
 
 //services
-
+const UserService = require('./services/user');
 
 module.exports = (db, config) => {
     const app = express();
     //services
-    /*const officesService = new OfficesServices(
-        db.offices,
-        errors
-    );*/
-    
+    const userService = new UserService(
+        db.users
+    );
+       
 
     //controllers
-    /*const logger = require('./global-controllers/logger')(loggerService);
-    const cache = require('./global-controllers/cache')(cacheService, loggerService);
-    const error = require('./global-controllers/error');
     const apiController = require('./controllers/api')(
-        officesService,
-        agentsServices,
-        propertiesServices,
-        cacheService,
-        config
-    );*/
+        userService
+    )
 
     //Mounting
     app.use(express.static('public'));
     app.use(cookieParser());
     app.use(bodyParse.json());
 
-    
+    app.use('/api', apiController);
+
     return app;
 };
