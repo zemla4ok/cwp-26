@@ -4,6 +4,7 @@ const bodyParse = require('body-parser');
 
 //services
 const UserService = require('./services/user');
+const TeamService = require('./services/team');
 
 module.exports = (db, config) => {
     const app = express();
@@ -11,12 +12,15 @@ module.exports = (db, config) => {
     const userService = new UserService(
         db.users
     );
-       
+    const teamService = new TeamService(
+        db.teams
+    );   
 
     //controllers
     const apiController = require('./controllers/api')(
-        userService
-    )
+        userService,
+        teamService
+    );
 
     //Mounting
     app.use(express.static('public'));

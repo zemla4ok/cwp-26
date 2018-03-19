@@ -1,7 +1,8 @@
 const express = require('express');
 
 module.exports = (
-    userService
+    userService,
+    teamService
 ) => {
     const router = express.Router();
 
@@ -9,9 +10,11 @@ module.exports = (
     const userController = require('./user')(
         userService
     );
-
+    const teamController = require('./team')(
+        teamService
+    );
     //defining routers
     router.use('/users', userController);
-
+    router.use('/teams', teamController);
     return router;
 }
