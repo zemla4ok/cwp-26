@@ -21,6 +21,6 @@ module.exports = (
     //defining routers
     router.use('/users', userController);
     router.use('/teams', teamController);
-    router.use('/teams/:teamId/users/:userId/work-periods', workPeriodController);
+    router.use('/teams', workPeriodController);
     return router;
 }

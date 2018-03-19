@@ -4,6 +4,11 @@ class WorkPeriodController extends CrudController{
     constructor(workPeriodService){
         super(workPeriodService);
 
+        for(let route in this.routes){
+            this.routes['/:teamId/users/:userId/work-periods' + route] = this.routes[route];
+            delete this.routes[route];
+        }
+
         this.registerRoutes();
     }
 
