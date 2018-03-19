@@ -5,6 +5,7 @@ const bodyParse = require('body-parser');
 //services
 const UserService = require('./services/user');
 const TeamService = require('./services/team');
+const WorkPeriodService = require('./services/workPeriod');
 
 module.exports = (db, config) => {
     const app = express();
@@ -15,11 +16,15 @@ module.exports = (db, config) => {
     const teamService = new TeamService(
         db.teams, db.users
     );   
+    const workPeriodService = new WorkPeriodService(
+        db.workPeriods
+    );
 
     //controllers
     const apiController = require('./controllers/api')(
         userService,
-        teamService
+        teamService,
+        workPeriodService,
     );
 
     //Mounting

@@ -2,7 +2,8 @@ const express = require('express');
 
 module.exports = (
     userService,
-    teamService
+    teamService,
+    workPeriodService,
 ) => {
     const router = express.Router();
 
@@ -13,8 +14,13 @@ module.exports = (
     const teamController = require('./team')(
         teamService
     );
+    const workPeriodController = require('./workPeriod')(
+        workPeriodService
+    );
+
     //defining routers
     router.use('/users', userController);
     router.use('/teams', teamController);
+    router.use('/teams/:teamId/users/:userId/work-periods', workPeriodController);
     return router;
 }

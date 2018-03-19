@@ -9,3 +9,4 @@ const server = require('./server')(db, config);
 
     server.listen(3000, () => console.log('Server is running'));
 })();
+ 
