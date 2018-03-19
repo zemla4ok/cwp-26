@@ -13,7 +13,7 @@ module.exports = (db, config) => {
         db.users
     );
     const teamService = new TeamService(
-        db.teams
+        db.teams, db.users
     );   
 
     //controllers
