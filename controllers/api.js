@@ -22,5 +22,6 @@ module.exports = (
     router.use('/users', userController);
     router.use('/teams', teamController);
     router.use('/teams', workPeriodController);
+
     return router;
 }

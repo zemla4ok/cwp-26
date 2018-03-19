@@ -4,10 +4,16 @@ class WorkPeriodController extends CrudController{
     constructor(workPeriodService){
         super(workPeriodService);
 
+        this.calcCoupleWorkPeriod = this.calcCoupleWorkPeriod.bind(this);       
+
         for(let route in this.routes){
             this.routes['/:teamId/users/:userId/work-periods' + route] = this.routes[route];
             delete this.routes[route];
         }
+
+        this.routes['/:teamId/users/:userId1/couple-work-periods/:userId2'] = [
+            {method: 'get', cb: this.calcCoupleWorkPeriod}
+          ];
 
         this.registerRoutes();
     }
@@ -22,6 +28,18 @@ class WorkPeriodController extends CrudController{
         req.body.teamId = parseInt(req.params.teamId);
         req.body.userId = parseInt(req.params.userId);
         await super.update(req, res);        
+    }
+
+    async calcCoupleWorkPeriod (req, res) {
+        let teamId = parseInt(req.params.teamId);
+        let userId1 = parseInt(req.params.userId1);
+        let userId2 = parseInt(req.params.userId2);
+        let data = await this.service.getCommonWorkHours(
+            userId1,
+            userId2,
+            teamId
+        )
+        res.json(data);
     }
 }
 

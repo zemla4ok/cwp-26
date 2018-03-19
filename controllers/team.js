@@ -15,7 +15,7 @@ class TeamController extends CrudController {
     async addUser(req, res) {
         let teamId = parseInt(req.params.id);
         let userId = parseInt(req.params.userId);
-        res.status(200).json(
+        res.status(200).json( 
             await this.service.addUser(teamId, userId)
         );
     }
