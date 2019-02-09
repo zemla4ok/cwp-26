@@ -14,7 +14,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "name": "@username/cwp-26",
+  "name": "@zemla4ok/cwp-26",
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {},
